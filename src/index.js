@@ -4,13 +4,13 @@ import { context, getOctokit } from '@actions/github';
 async function run() {
   try {
     const token = core.getInput("repo-token", { required: true });
-    if (context.payload.pull_request === undefined) {
-      throw new Error("Can't get pull_request payload. Check you trigger pull_request event");
+    if (context.payload.issuet === undefined) {
+      throw new Error("Can't get issue payload. Check you trigger issue event");
     }
-    const { assignees, number, user: { login: author, type } } = context.payload.pull_request;
+    const { assignees, number, user: { login: author, type } } = context.payload.issue;
 
     if (assignees.length > 0) {
-      core.info(`Assigning author has been skipped since the pull request is already assigned to someone`);
+      core.info(`Assigning author has been skipped since the issue is already assigned to someone`);
       return;
     }
     if (type === 'Bot') {
@@ -26,7 +26,7 @@ async function run() {
       assignees: [author]
     });
     core.debug(JSON.stringify(result));
-    core.info(`@${author} has been assigned to the pull request: #${number}`);
+    core.info(`@${author} has been assigned to the issue: #${number}`);
   } catch (error) {
     core.setFailed(error.message);
   }

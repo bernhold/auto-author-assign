@@ -6879,13 +6879,13 @@ __webpack_require__.r(__webpack_exports__);
 async function run() {
   try {
     const token = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput("repo-token", { required: true });
-    if (_actions_github__WEBPACK_IMPORTED_MODULE_1__.context.payload.pull_request === undefined) {
-      throw new Error("Can't get pull_request payload. Check you trigger pull_request event");
+    if (_actions_github__WEBPACK_IMPORTED_MODULE_1__.context.payload.issuet === undefined) {
+      throw new Error("Can't get issue payload. Check you trigger issue event");
     }
-    const { assignees, number, user: { login: author, type } } = _actions_github__WEBPACK_IMPORTED_MODULE_1__.context.payload.pull_request;
+    const { assignees, number, user: { login: author, type } } = _actions_github__WEBPACK_IMPORTED_MODULE_1__.context.payload.issue;
 
     if (assignees.length > 0) {
-      _actions_core__WEBPACK_IMPORTED_MODULE_0__.info(`Assigning author has been skipped since the pull request is already assigned to someone`);
+      _actions_core__WEBPACK_IMPORTED_MODULE_0__.info(`Assigning author has been skipped since the issue is already assigned to someone`);
       return;
     }
     if (type === 'Bot') {
@@ -6901,7 +6901,7 @@ async function run() {
       assignees: [author]
     });
     _actions_core__WEBPACK_IMPORTED_MODULE_0__.debug(JSON.stringify(result));
-    _actions_core__WEBPACK_IMPORTED_MODULE_0__.info(`@${author} has been assigned to the pull request: #${number}`);
+    _actions_core__WEBPACK_IMPORTED_MODULE_0__.info(`@${author} has been assigned to the issue: #${number}`);
   } catch (error) {
     _actions_core__WEBPACK_IMPORTED_MODULE_0__.setFailed(error.message);
   }
