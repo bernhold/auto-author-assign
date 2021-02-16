@@ -6879,7 +6879,7 @@ __webpack_require__.r(__webpack_exports__);
 async function run() {
   try {
     const token = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput("repo-token", { required: true });
-    if (_actions_github__WEBPACK_IMPORTED_MODULE_1__.context.payload.issuet === undefined) {
+    if (_actions_github__WEBPACK_IMPORTED_MODULE_1__.context.payload.issue === undefined) {
       throw new Error("Can't get issue payload. Check you trigger issue event");
     }
     const { assignees, number, user: { login: author, type } } = _actions_github__WEBPACK_IMPORTED_MODULE_1__.context.payload.issue;

@@ -4,7 +4,7 @@ import { context, getOctokit } from '@actions/github';
 async function run() {
   try {
     const token = core.getInput("repo-token", { required: true });
-    if (context.payload.issuet === undefined) {
+    if (context.payload.issue === undefined) {
       throw new Error("Can't get issue payload. Check you trigger issue event");
     }
     const { assignees, number, user: { login: author, type } } = context.payload.issue;
